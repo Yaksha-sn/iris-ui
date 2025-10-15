@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Iris - UI mockup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f6f6f7;
+      --card:#ffffff;
+      --muted:#9b9b9b;
+      --accent:#6c5ce7; /* purple */
+      --accent-2:#5b4fe0;
+      --shadow: 0 6px 18px rgba(20,18,33,0.06);
+      --radius:14px;
+      --mobile-width:390px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:var(--bg);
+      color:#111827;
+      display:flex;
+      justify-content:center;
+      padding:20px 0;
+    }
+
+    /* container to simulate phone viewport */
+    .phone {
+      width:var(--mobile-width);
+      max-width:100%;
+      background:transparent;
+      border-radius:28px;
+      overflow:hidden;
+      box-shadow: 0 8px 30px rgba(12,12,20,0.06);
+    }
+
+    .screen {
+      padding:22px;
+      background:linear-gradient(180deg,var(--bg),#f4f4f6 60%);
+      min-height:820px; /* roughly phone height */
+    }
+
+    /* header */
+    .header {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:16px;
+    }
+    .logo {
+      font-weight:300;
+      font-size:34px;
+      letter-spacing:6px;
+    }
+    .icons { display:flex; gap:12px; align-items:center; }
+    .bell {
+      width:34px;height:34px;border-radius:8px;background:transparent;border:1px solid rgba(99,84,255,0.08);
+      display:flex;align-items:center;justify-content:center;position:relative;
+    }
+    .dot {
+      position:absolute; right:6px; top:6px; width:8px;height:8px;background:#ff4d6d;border-radius:50%;
+      box-shadow:0 0 0 2px #fff;
+    }
+
+    /* profile card */
+    .profile-card {
+      background:var(--card);
+      border-radius:18px;
+      padding:16px;
+      display:flex;
+      gap:16px;
+      align-items:center;
+      box-shadow:var(--shadow);
+      margin-bottom:18px;
+    }
+    .avatar {
+      width:64px;height:64px;border-radius:50%;
+      background:linear-gradient(180deg,#eee,#ddd);
+      flex:0 0 64px;
+      overflow:hidden;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .avatar img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    .profile-info {
+      flex:1;
+    }
+    .name { font-weight:700; font-size:16px; margin-bottom:4px; }
+    .meta { color:var(--muted); font-size:13px; line-height:1.32; }
+
+    .chev { color:var(--accent); font-weight:700; }
+
+    /* Dashboard small cards row */
+    .row {
+      display:flex;
+      gap:12px;
+      margin-bottom:16px;
+    }
+    .card {
+      background:var(--card);
+      border-radius:12px;
+      padding:14px;
+      flex:1;
+      box-shadow:var(--shadow);
+      min-height:84px;
+    }
+    .card h4 { margin:0; font-size:13px; color:var(--accent); font-weight:700; letter-spacing:0.2px; }
+    .card .value { font-weight:700; font-size:20px; margin-top:6px;}
+    .card .sub { color:var(--muted); font-size:13px; margin-top:4px; }
+
+    /* courses grid */
+    .section-title{
+      font-weight:700;
+      margin:6px 0 12px;
+      font-size:18px;
+    }
+    .courses {
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-bottom:18px;
+    }
+    .course {
+      background:var(--card);
+      border-radius:12px;
+      padding:12px;
+      box-shadow:var(--shadow);
+      min-height:86px;
+    }
+    .course .code { color:#6b6be8; font-weight:700; font-size:14px; }
+    .course .title { margin-top:6px; font-weight:600; font-size:14px; color:#222; }
+    .course .muted { color:var(--muted); font-size:12px; margin-top:8px; }
+
+    /* favorite screens & floating chat bubble */
+    .favorites {
+      margin-top:4px;
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:18px;
+    }
+    .star { font-size:14px; color:#111; transform:rotate(-8deg); }
+
+    .floating-chat {
+      position:fixed;
+      right:24px;
+      bottom:94px;
+      width:56px;height:56px;border-radius:16px;background:var(--accent);
+      display:flex;align-items:center;justify-content:center;color:white;
+      box-shadow:0 6px 20px rgba(108,92,231,0.18);
+      font-weight:700;
+      z-index:40;
+    }
+
+    /* bottom nav */
+    .bottom-nav {
+      position:sticky;
+      bottom:0;
+      display:flex;
+      gap:18px;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 18px;
+      background:transparent;
+      margin-top:18px;
+    }
+    .nav-card {
+      width:100%;
+      background:var(--card);
+      border-radius:20px;
+      padding:10px 16px;
+      display:flex;
+      gap:18px;
+      align-items:center;
+      justify-content:space-between;
+      box-shadow:var(--shadow);
+    }
+    .nav-item { display:flex;flex-direction:column; align-items:center; font-size:12px; color:var(--muted); text-decoration:none; }
+    .nav-item.active { color:var(--accent); font-weight:700; }
+
+    /* small helpers */
+    .small-muted { color:var(--muted); font-size:12px; }
+
+    /* responsive smaller phones */
+    @media (max-width:380px){
+      .phone{ padding:0 6px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="phone" role="application" aria-label="Iris mobile UI">
+    <div class="screen">
+      <div class="header">
+        <div class="logo">iris</div>
+        <div class="icons">
+          <!-- bell -->
+          <div class="bell" aria-hidden="true">
+            <!-- bell icon (svg) -->
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 17H9a3 3 0 0 1-3-3V11a6 6 0 0 1 12 0v3a3 3 0 0 1-3 3z" stroke="#6c5ce7" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11 21a2 2 0 0 0 2-2" stroke="#6c5ce7" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="dot" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile card -->
+      <div class="profile-card">
+        <div class="avatar">
+          <!-- replace src with your avatar path -->
+          <img src="recent photo.png" alt="Profile avatar">
+        </div>
+        <div class="profile-info">
+          <div class="name">S N Yakshaa</div>
+          <div class="meta">M Tech, 2nd Year, 3rd Semester<br>Metallurgical and Materials Engineering</div>
+        </div>
+        <div class="chev">›</div>
+      </div>
+
+      <!-- Dashboard row -->
+      <div class="row">
+        <div class="card">
+          <h4>CGPA</h4>
+          <div class="value">9.25</div>
+          <div class="sub">Major</div>
+        </div>
+        <div class="card">
+          <h4>Hostel</h4>
+          <div class="value" style="font-size:15px;font-weight:700;margin-top:6px;">Niligiri (Block - V)</div>
+          <div class="sub">Room Number 139</div>
+        </div>
+      </div>
+
+      <!-- Courses -->
+      <div class="section-title">Courses</div>
+      <div class="courses">
+        <div class="course">
+          <div class="code">MT871</div>
+          <div class="title">Minor Project</div>
+          <div class="muted">Attendance not marked yet.</div>
+        </div>
+        <div class="course">
+          <div class="code">MT878</div>
+          <div class="title">Major Project - 3rd Sem</div>
+          <div class="muted">Attendance not marked yet.</div>
+        </div>
+      </div>
+
+      <div class="favorites">
+        <div style="font-size:16px">Favorite Screens</div>
+        <div class="star">★</div>
+      </div>
+
+      <!-- placeholder for "Add Favorite" card similar to screenshot -->
+      <div class="card" style="border-radius:12px; padding:16px; display:flex; align-items:center; justify-content:center;">
+        <div class="small-muted">Add Favorite</div>
+      </div>
+
+      <!-- floating chat -->
+      <div class="floating-chat" title="Chat">
+        💬
+      </div>
+
+      <!-- bottom navigation -->
+       <div class="bottom-nav">
+        <div class="nav-card" role="navigation" aria-label="Bottom navigation">
+          <a class="nav-item active" href="#">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M3 11.5L12 4l9 7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Home</span>
+          </a>
+
+          <a class="nav-item" href="#">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Categories</span>
+          </a>
+
+          <!-- updated More icon: left small rounded squares + right lines (list-with-bullets) -->
+          <a class="nav-item" href="#">
+            <svg width="22" height="20" viewBox="0 0 22 20" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <!-- Row 1 -->
+              <rect x="1" y="2" width="3.5" height="3.5" rx="0.9" fill="currentColor" opacity="0.95"/>
+              <rect x="6.5" y="3.25" width="14" height="1.2" rx="0.6" fill="currentColor" opacity="0.95"/>
+              <!-- Row 2 -->
+              <rect x="1" y="8" width="3.5" height="3.5" rx="0.9" fill="currentColor" opacity="0.95"/>
+              <rect x="6.5" y="9.25" width="14" height="1.2" rx="0.6" fill="currentColor" opacity="0.95"/>
+              <!-- Row 3 -->
+              <rect x="1" y="14" width="3.5" height="3.5" rx="0.9" fill="currentColor" opacity="0.95"/>
+              <rect x="6.5" y="15.25" width="14" height="1.2" rx="0.6" fill="currentColor" opacity="0.95"/>
+            </svg>
+            <span>More</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
